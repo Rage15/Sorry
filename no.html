@@ -2,32 +2,105 @@
 <html>
 <head>
 <title>Sorry 😢</title>
+
 <style>
 body {
+    margin: 0;
+    height: 100vh;
     text-align:center;
-    background:#fff0f5;
-    font-family: Arial;
-    padding-top:80px;
+    font-family: Arial, sans-serif;
+    background: url("teddy.jpg") no-repeat center center fixed;
+    background-size: cover;
+    overflow: hidden;
 }
-img { width:300px; }
+
+/* Dark overlay */
+.overlay {
+    position: absolute;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.3);
+}
+
+/* Floating Sorry text */
+.sorry {
+    position:absolute;
+    top:30%;
+    width:100%;
+    text-align:center;
+    font-size:40px;
+    color:white;
+    text-shadow:2px 2px 10px black;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px);}
+    50% { transform: translateY(-20px);}
+    100% { transform: translateY(0px);}
+}
+
+/* Try Again Button */
 button {
-    margin-top:30px;
-    padding:15px 40px;
+    position:absolute;
+    bottom:80px;
+    left:50%;
+    transform: translateX(-50%);
+    padding:15px 45px;
     font-size:22px;
     border:none;
-    border-radius:10px;
+    border-radius:30px;
     background:#ff2f68;
     color:white;
+    cursor:pointer;
+    animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: translateX(-50%) scale(1);}
+    50% { transform: translateX(-50%) scale(1.1);}
+    100% { transform: translateX(-50%) scale(1);}
+}
+
+/* Hearts */
+.heart {
+    position:absolute;
+    color:pink;
+    font-size:20px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% { transform: translateY(-50px); opacity:1;}
+    100% { transform: translateY(100vh); opacity:0;}
 }
 </style>
 </head>
+
 <body>
 
-<h2>Please maaf kardo 🥺</h2>
-<img src="https://media.giphy.com/media/ASd0Ukj0y3qMM/giphy.gif">
-<br>
+<div class="overlay"></div>
+
+<div class="sorry">Please maaf kardo 🥺💖</div>
+
 <button onclick="location.href='index.html'">Try Again 💔</button>
+
+<script>
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 5000);
+}
+
+setInterval(createHeart, 300);
+</script>
 
 </body>
 </html>
-
