@@ -1,61 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For You ❤️</title>
 
 <style>
 body {
     margin:0;
-    height:100vh;
-    background: linear-gradient(#ffd6e7, #fff);
-    font-family: Georgia, serif;
-    text-align:center;
+    background:linear-gradient(#ffd6e7,#fff);
+    font-family: Georgia;
     overflow:hidden;
+    text-align:center;
 }
 
-/* Hearts falling */
+#box {
+    margin:10vh auto;
+    width:85%;
+    max-width:500px;
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 0 30px rgba(255,0,100,0.4);
+    animation: glow 2s infinite alternate;
+}
+
+#text {
+    font-size:18px;
+    line-height:1.6;
+}
+
+@keyframes glow {
+    from{box-shadow:0 0 15px pink;}
+    to{box-shadow:0 0 30px hotpink;}
+}
+
 .heart {
     position:absolute;
     color:red;
-    font-size:22px;
+    font-size:20px;
     animation: fall linear infinite;
 }
-
 @keyframes fall {
-    0% { transform: translateY(-50px); opacity:1;}
-    100% { transform: translateY(100vh); opacity:0;}
-}
-
-/* Letter box */
-#box {
-    position: relative;
-    margin: 80px auto;
-    width: 70%;
-    max-width: 600px;
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 0 30px rgba(255,0,100,0.4);
-}
-
-/* Typing effect */
-#text {
-    font-size: 22px;
-    line-height: 1.6;
-    color:#333;
-}
-
-/* Glow animation */
-#box {
-    animation: glow 2s infinite alternate;
-}
-@keyframes glow {
-    from { box-shadow:0 0 20px pink; }
-    to { box-shadow:0 0 40px hotpink; }
+    0%{transform:translateY(-50px);opacity:1;}
+    100%{transform:translateY(100vh);opacity:0;}
 }
 </style>
-
 </head>
+
 <body>
 
 <div id="box">
@@ -63,41 +54,35 @@ body {
 </div>
 
 <script>
-// ❤️ Your message
 const message = `Hey love ❤️
 
-I know I made mistakes…
+I know I hurt you…
 But my heart never stopped choosing you.
 You are my favorite person,
 my peace, my home.
 
-Thank you for forgiving me.
-I promise to love you better every day 💕`;
+Thank you for forgiving me 💕`;
 
-let i = 0;
-function typeText() {
-    if (i < message.length) {
-        document.getElementById("text").innerHTML += message.charAt(i);
-        i++;
-        setTimeout(typeText, 40);
-    }
+let i=0;
+function type(){
+ if(i<message.length){
+  document.getElementById("text").innerHTML+=message.charAt(i);
+  i++;
+  setTimeout(type,40);
+ }
 }
-typeText();
+type();
 
-// Heart rain
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * window.innerWidth + "px";
-    heart.style.animationDuration = (2 + Math.random() * 3) + "s";
-    document.body.appendChild(heart);
-
-    setTimeout(() => {
-        heart.remove();
-    }, 5000);
+function heart(){
+ const h=document.createElement("div");
+ h.className="heart";
+ h.innerHTML="❤️";
+ h.style.left=Math.random()*window.innerWidth+"px";
+ h.style.animationDuration=(2+Math.random()*3)+"s";
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),5000);
 }
-setInterval(createHeart, 300);
+setInterval(heart,300);
 </script>
 
 </body>
