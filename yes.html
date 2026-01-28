@@ -2,36 +2,103 @@
 <html>
 <head>
 <title>For You ❤️</title>
+
 <style>
 body {
-    background:#ffe8f2;
-    font-family:Georgia;
+    margin:0;
+    height:100vh;
+    background: linear-gradient(#ffd6e7, #fff);
+    font-family: Georgia, serif;
     text-align:center;
-    padding:50px;
+    overflow:hidden;
 }
-#letter {
-    background:white;
-    padding:40px;
-    border-radius:15px;
-    box-shadow:0 0 20px rgba(0,0,0,0.2);
+
+/* Hearts falling */
+.heart {
+    position:absolute;
+    color:red;
     font-size:22px;
-    line-height:1.6;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% { transform: translateY(-50px); opacity:1;}
+    100% { transform: translateY(100vh); opacity:0;}
+}
+
+/* Letter box */
+#box {
+    position: relative;
+    margin: 80px auto;
+    width: 70%;
+    max-width: 600px;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(255,0,100,0.4);
+}
+
+/* Typing effect */
+#text {
+    font-size: 22px;
+    line-height: 1.6;
+    color:#333;
+}
+
+/* Glow animation */
+#box {
+    animation: glow 2s infinite alternate;
+}
+@keyframes glow {
+    from { box-shadow:0 0 20px pink; }
+    to { box-shadow:0 0 40px hotpink; }
 }
 </style>
+
 </head>
 <body>
 
-<h1>For You ❤️</h1>
-
-<div id="letter">
-Hey love,<br><br>
-I know I hurt you and I hate myself for that.  
-Please believe me, my love for you was always real.  
-You mean everything to me.  
-I’m really really sorry 💕  
-<br><br>
-Yours always ❤️
+<div id="box">
+  <div id="text"></div>
 </div>
+
+<script>
+// ❤️ Your message
+const message = `Hey love ❤️
+
+I know I made mistakes…
+But my heart never stopped choosing you.
+You are my favorite person,
+my peace, my home.
+
+Thank you for forgiving me.
+I promise to love you better every day 💕`;
+
+let i = 0;
+function typeText() {
+    if (i < message.length) {
+        document.getElementById("text").innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeText, 40);
+    }
+}
+typeText();
+
+// Heart rain
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 5000);
+}
+setInterval(createHeart, 300);
+</script>
 
 </body>
 </html>
